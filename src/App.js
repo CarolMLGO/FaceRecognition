@@ -8,11 +8,6 @@ import FaceRecognition from './Components/FaceRecognition/FaceRecognition';
 import Rank from './Components/Rank/Rank';
 import './App.css';
 import Particles from 'react-particles-js';
-import Clarifai from 'clarifai';
-
-const app = new Clarifai.App({
- apiKey: '2c31633468e34cce98e3318cfdcc3081'
-});
 
 const particleOptions = {
   particles: {
@@ -25,20 +20,39 @@ const particleOptions = {
     }
   }
 }
-class App extends Component {
-  constructor() {
-    super()
-    this.state={
-      input:'',
+
+const initialState={
+  input:'',
       imageUrl:'',
       box:{},
       route:'home',
       isSignedIn: false,
       facesArray:'',
-    }
-  }
+      user:{id:'',
+            name:'',
+            email:'',
+            entries:'',
+            joined:''}
+}
 
-calculateFaceLocation = (data) => {
+class App extends Component {
+  constructor() {
+    super()
+    this.state=initialState
+    }
+  
+  loadUser = (data) => {
+    this.setState({user:{
+      id:data.id,
+      name:data.name,
+      email:data.email,
+      entries:data.entries,
+      joined:data.joined
+    }
+  })
+}
+
+/*calculateFaceLocation = (data) => {
     const clarifaiFace=data.outputs[0].data.regions;
     const image = document.getElementById('inputimage');
     const width = Number(image.width);
@@ -52,27 +66,66 @@ calculateFaceLocation = (data) => {
         rightCol: width - (listFaces.right_col*width),
         bottomRow: height - (listFaces.bottom_row*height)}
       })
+}*/
+
+calculateFaceLocation = (data) => {
+    const clarifaiFace=data.outputs[0].data.regions[0];
+    const image = document.getElementById('inputimage');
+    const width = Number(image.width);
+    const height = Number(image.height);
+    const listFaces=clarifaiFace.region_info.bounding_box;
+    // console.log('listFaces',listFaces)
+    return {
+      leftCol: listFaces.left_col * width,
+      topRow: listFaces.top_row * height,
+      rightCol: width - (listFaces.right_col*width),
+      bottomRow: height - (listFaces.bottom_row*height)}
 }
 
-  displayFaceBox = (box) => {
-    this.setState({box: box});
-    console.log('check box',this.state.box)
+  displayFaceBox=(box)=>{
+    this.setState({box:box})
   }
 
   onInputChange = (event) =>{
     this.setState({input: event.target.value})
   }
 
+
+
   onButtonSubmit = () => {
     this.setState({imageUrl:this.state.input});
-    app.models.predict(Clarifai.FACE_DETECT_MODEL, this.state.input)
-    .then(response=>this.displayFaceBox(this.calculateFaceLocation(response)))
+    fetch('https://peaceful-mesa-79031.herokuapp.com/imageurl',{
+      method:'post',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        input:this.state.input
+      })
+    })
+    .then(response=>response.json())
+    .then(response=>
+      {if(response){
+        fetch('https://peaceful-mesa-79031.herokuapp.com/image',{
+          method:'put',
+          headers:{'Content-Type':'application/json'},
+          body: JSON.stringify({
+            id:this.state.user.id
+          })
+        })
+        .then(response=>response.json())
+        .then(count=>{
+          this.setState(Object.assign(this.state.user,{entries:count}))
+        })
+        .catch(console.log)
+      }
+        this.displayFaceBox(this.calculateFaceLocation(response))}
+      
+  )
     .catch(error=>console.log(error))
   }
 
   onRoutechange = (route) => {
     if (route === 'signout') {
-          this.setState({isSignedIn:false})
+          this.setState(initialState)
         } else if (route==='home'){
           this.setState({isSignedIn:true})
         }
@@ -87,14 +140,14 @@ calculateFaceLocation = (data) => {
         { this.state.route === 'home'
         ? <div>
             <Logo />
-            <Rank />
+            <Rank name={this.state.user.name} entries={this.state.user.entries}/>
             <ImageLinkForm onInputChange={this.onInputChange} onButtonSubmit={this.onButtonSubmit}/>
             <FaceRecognition box={this.state.box} imageUrl={this.state.imageUrl}/>
           </div>
         :(
           this.state.route==='signin'
-          ?<Signin onRoutechange={this.onRoutechange}/>
-          :<Register onRoutechange={this.onRoutechange}/>
+          ?<Signin onRoutechange={this.onRoutechange} loadUser={this.loadUser}/>
+          :<Register onRoutechange={this.onRoutechange} loadUser={this.loadUser}/>
 
           )
 
