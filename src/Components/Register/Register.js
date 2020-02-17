@@ -1,49 +1,50 @@
 import React from 'react';
+import { url } from '../../url';
 
-class  Register extends React.Component { 
-	constructor(props){
-		super(props)
-		this.state={
-			registerName:'',
-			registerEmail:'',
-			registerPassword:''
-		}
-	}
+class Register extends React.Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            registerName: '',
+            registerEmail: '',
+            registerPassword: ''
+        }
+    }
 
-	onNameChange = (event) => {
-		this.setState({registerName:event.target.value})
-	}
+    onNameChange = (event) => {
+        this.setState({ registerName: event.target.value })
+    }
 
-	onEmailChange = (event) => {
-		this.setState({registerEmail:event.target.value})
-	}
+    onEmailChange = (event) => {
+        this.setState({ registerEmail: event.target.value })
+    }
 
-	onPasswordChange = (event) => {
-		this.setState({registerPassword:event.target.value})
-	}
+    onPasswordChange = (event) => {
+        this.setState({ registerPassword: event.target.value })
+    }
 
-	onSubmitRegister = () => {
-		fetch('https://peaceful-mesa-79031.herokuapp.com/register',{
-			method:'post',
-			headers:{'Content-Type':'application/json'},
-			body:JSON.stringify({
-				name:this.state.registerName,
-				email:this.state.registerEmail,
-				password:this.state.registerPassword
-			})
-		})
-		.then(response=>response.json())
-		.then(user=>{
-			if(user.id){
-				this.props.loadUser(user)
-				this.props.onRoutechange('home');
-			}
-		})
-	}
+    onSubmitRegister = () => {
+        fetch(`${url}/register`, {
+                method: 'post',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    name: this.state.registerName,
+                    email: this.state.registerEmail,
+                    password: this.state.registerPassword
+                })
+            })
+            .then(response => response.json())
+            .then(user => {
+                if (user.id) {
+                    this.props.loadUser(user)
+                    this.props.onRoutechange('home');
+                }
+            })
+    }
 
-	render() {
-		return (
-		<article className="br2 ba dark-gray b--black-10 mv3 w-100 w-50-m w-25-l shadow-5 mw6 center">
+    render() {
+        return (
+            <article className="br2 ba dark-gray b--black-10 mv3 w-100 w-50-m w-25-l shadow-5 mw6 center">
 			<main className="pa4 black-80">
 			  <div className="measure">
 			    <fieldset id="sign_up" className="ba b--transparent ph0 mh0">
@@ -89,8 +90,8 @@ class  Register extends React.Component {
 			  </div>
 			</main>
 		</article>
-		);
-}
+        );
+    }
 }
 
-export default Register ;
+export default Register;
