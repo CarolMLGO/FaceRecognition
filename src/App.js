@@ -26,7 +26,7 @@ const particleOptions = {
 const initialState = {
     input: '',
     imageUrl: '',
-    box: {},
+    boxes: [],
     route: 'home',
     isSignedIn: false,
     facesArray: '',
@@ -65,6 +65,7 @@ class App extends Component {
         })
     }
 
+    //single face calculation
     /*calculateFaceLocation = (data) => {
         const clarifaiFace=data.outputs[0].data.regions;
         const image = document.getElementById('inputimage');
@@ -81,6 +82,25 @@ class App extends Component {
           })
     }*/
 
+    // multiple face calculation
+    calculateMultipleFaces = (data) => {
+        const boxes = [];
+        const clarifaiFaces = data.outputs[0].data.regions;
+        const image = document.getElementById('inputimage');
+        const width = Number(image.width);
+        const height = Number(image.height);
+        clarifaiFaces.forEach(clarifaiFace => {
+            const listFaces = clarifaiFace.region_info.bounding_box;
+            boxes.push({
+                leftCol: listFaces.left_col * width,
+                topRow: listFaces.top_row * height,
+                rightCol: width - (listFaces.right_col * width),
+                bottomRow: height - (listFaces.bottom_row * height)
+            })
+        })
+        return boxes
+    }
+
     calculateFaceLocation = (data) => {
         const clarifaiFace = data.outputs[0].data.regions[0];
         const image = document.getElementById('inputimage');
@@ -96,8 +116,8 @@ class App extends Component {
         }
     }
 
-    displayFaceBox = (box) => {
-        this.setState({ box: box })
+    displayFaceBox = (boxes) => {
+        this.setState({ boxes: boxes })
     }
 
     onInputChange = (event) => {
@@ -129,7 +149,8 @@ class App extends Component {
                             })
                             .catch(console.log)
                     }
-                    this.displayFaceBox(this.calculateFaceLocation(response))
+                    // this.displayFaceBox(this.calculateFaceLocation(response))
+                    this.displayFaceBox(this.calculateMultipleFaces(response))
                 }
 
             )
@@ -155,7 +176,7 @@ class App extends Component {
             <Logo />
             <Rank name={this.state.user.name} entries={this.state.user.entries}/>
             <ImageLinkForm onInputChange={this.onInputChange} onButtonSubmit={this.onButtonSubmit}/>
-            <FaceRecognition box={this.state.box} imageUrl={this.state.imageUrl}/>
+            <FaceRecognition boxes={this.state.boxes} imageUrl={this.state.imageUrl}/>
           </div>
         :(
           this.state.route==='signin'
