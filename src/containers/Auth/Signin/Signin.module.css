@@ -1,0 +1,62 @@
+.Signin{
+  margin: 1rem auto;
+  max-width: 50rem;
+  background: #FFF;
+  border-radius: 2px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+  padding: 3rem;
+}
+.Form {
+  width: 80%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.Signin h1 {
+  font-weight: 300;
+  font-size: 2.8rem;
+}
+
+.Signin input[type="text"],
+.Signin input[type="password"] {
+  margin: 0.5rem auto;
+  display: block;
+  padding: 4px;
+  width: 100%;
+  border:none;
+  border-bottom: 1px solid #AAA;
+  font-weight: 400;
+  font-size: 1.5rem;
+  transition: 0.2s ease;
+}
+
+.Signin  input[type="text"]:focus,
+.Signin  input[type="password"]:focus {
+  border-bottom: 2px solid #04c8de;
+  color: #04c8de;
+  transition: 0.2s ease;
+}
+.Signin_Register a {
+    color: black;
+    text-decoration: none;
+    padding:1rem;
+}
+
+.Signin_Register {
+    margin: 1.5rem auto;
+    font-size:1.5rem;
+    /*cursor:pointer;*/
+}
+.Signin_Register a:hover {
+    color:#ff5edf;
+    font-weight: bold;
+}
+
+.error{
+  color:red;
+  padding:4px;
+  align-self: flex-start;
+}
+

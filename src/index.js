@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import 'tachyons';
 import {BrowserRouter} from 'react-router-dom';
+import 'tachyons';// tachyons will overwrite bootstrap if there is confilict
+import './index.css'; // be careful the order of css, it is not safe to use all the third party css packages
 
 ReactDOM.render(
 	(<BrowserRouter>

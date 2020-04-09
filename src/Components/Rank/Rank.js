@@ -1,15 +1,16 @@
 import React from 'react';
+import './Rank.css';
 
 const Rank=({name,entries}) => {
 	return (
-		<div>
-			<div className='black f1'>
-				{`${name}`}
+		<div className="Rank">
+			<div className='user'>
+				{`Hello, ${name}`}
 			</div>
-			<div className='white f3'>
+			<div className='text'>
 				{'---your current face detection is---'}
 			</div>
-			<div className='white f1'>
+			<div className='entries'>
 				{entries}
 			</div>
 		</div>

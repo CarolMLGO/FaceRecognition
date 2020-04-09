@@ -1,0 +1,127 @@
+*:focus {
+  outline: none;
+}
+
+.Register{
+  position:relative;
+  display: flex;
+  flex-direction: row;
+  margin: 1rem auto;
+  max-width: 70rem;
+  background: #FFF;
+  border-radius: 2px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.Register .Left {
+  padding: 4rem;
+  display: flex;
+  flex-direction: column;
+  flex: 0 0 50%;
+  align-items: center;
+}
+
+.Register h1 {
+  margin: 0 0 1rem 0;
+  /*font-weight: 300;*/
+  font-size: 2.8rem;
+}
+
+.Register input[type="text"],
+.Register input[type="password"] {
+  display: block;
+  box-sizing: border-box;
+  margin:0.8rem auto;
+  padding: 4px;
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid #AAA;
+  font-weight: 400;
+  font-size: 1.5rem;
+  transition: 0.2s ease;
+}
+
+.Register input[type="text"]:focus,
+.Register input[type="password"]:focus {
+  border-bottom: 2px solid #04c8de;
+  color: #04c8de;
+  transition: 0.2s ease;
+}
+
+.Register .OR {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  width: 4rem;
+  height: 4rem;
+  background: #DDD;
+  border-radius: 50%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+  line-height: 4rem;
+  text-align: center;
+}
+
+.Register .Right {
+  padding: 4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 0 0 50%;
+  background: url("../../../assets/images/register_bg.jfif");
+  background-size: cover;
+  background-position: center;
+  border-radius: 0 2px 2px 0;
+}
+
+.Register .Right .loginwith {
+  /*display: block;*/
+  margin-bottom: 4rem;
+  font-size: 2.8rem;
+  color: black;
+  text-align: center;
+}
+
+.Register button.social_signin {
+  font-size:1.2rem;
+  margin-bottom: 2rem;
+  width: 70%;
+  height: 3.6rem;
+  border: none;
+  border-radius: 2px;
+  color: #FFF;
+  font-weight: 500;
+  transition: 0.2s ease;
+  cursor: pointer;
+}
+
+.Register button.social_signin:hover,
+.Register button.social_signin:focus {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+  transition: 0.2s ease;
+  transform:translateY(-2px);
+}
+
+.Register button.social_signin:active {
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+  transition: 0.2s ease;
+  transform:translateY(0);
+}
+
+.Register button.social_signin.facebook {
+  background: #32508E;
+}
+
+.Register button.social_signin.twitter {
+  background: #55ACEE;
+}
+
+.Register button.social_signin.google {
+  background: #DD4B39;
+}
+
+.error{
+  color:red;
+  padding:4px;
+  align-self:flex-start;
+}

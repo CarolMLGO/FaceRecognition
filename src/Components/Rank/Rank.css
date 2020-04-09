@@ -1,0 +1,21 @@
+.Rank {
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+.Rank .user{
+    font-size: 2rem;
+    font-weight: bold;
+    color: black;
+}
+
+.Rank .text {
+    color: white;
+}
+
+.Rank .entries{
+    font-size: 2rem;
+    color: purple;
+    font-weight: bold;
+    font-style: italic;
+}

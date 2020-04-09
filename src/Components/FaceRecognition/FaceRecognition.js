@@ -21,23 +21,23 @@ import './faceRecognition.css';
 // multiple face detection
 const FaceRecognition = ({ imageUrl, boxes }) => {
     return (
-        <div className='center ma'>
-        <div className='absolute mt2'>
-        <img id='inputimage' alt='' src={imageUrl} width='500px' heigh='auto'/>
-        {
-          boxes.map((box,index) => {
-            return  <div className="bounding-box"
-                          key={index}
-                          style={{
-                            top: box.topRow,
-                            right: box.rightCol,
-                            bottom: box.bottomRow,
-                            left: box.leftCol
-                          }}>
-                     </div>
-          })
-        }
-      </div>
+        <div className='FaceRecognition'>
+          <div className='image-box'>
+            <img id='imageinput' alt='' src={imageUrl}/>
+            {
+              boxes.map((box,index) => {
+                return  <div className="bounding-box"
+                             key={index}
+                             style={{
+                                top: box.topRow,
+                                right: box.rightCol,
+                                bottom: box.bottomRow,
+                                left: box.leftCol
+                              }}>
+                         </div>
+              })
+            }
+        </div>
       </div>
     );
 }

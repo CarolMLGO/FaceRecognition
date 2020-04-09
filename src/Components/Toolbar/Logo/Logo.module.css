@@ -1,0 +1,17 @@
+.Logo {
+    margin: 1rem 0 1rem 1rem;
+}
+
+.Tilt {
+	background: linear-gradient(89deg,#ff5edf 0%, #04c8de 100%);
+	/*background: linear-gradient(red, yellow);*/
+    box-shadow: 0 3px 4px rgba(0,0,0,0.4);
+    border-radius: 2px;
+    height: 8rem;
+    width: 8rem;
+}
+
+.Tilt_inner {
+    padding:1rem;
+}
+
