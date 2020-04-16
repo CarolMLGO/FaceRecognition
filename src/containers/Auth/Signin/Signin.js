@@ -49,8 +49,8 @@ class Signin extends React.Component {
                                     <Field name="password" type="text" placeholder="password"/>
                                     <ErrorMessage className={styles.error} name="password">
                                         {msg=><div className={styles.error}>{msg}</div>}
-                                    </ErrorMessage>                                   
-                                    <Button disabled={!isValid} clicked={()=>this.onSubmitSignIn(values)}> Sign In </Button>
+                                    </ErrorMessage>                                
+                                    <Button marginProps='marginTopSmall' disabled={!isValid} clicked={()=>this.onSubmitSignIn(values)}> Sign In </Button>
                                     <div className={styles.Signin_Register}>
                                         <Link to="/register">Register</Link>
                                     </div>

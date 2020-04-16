@@ -1,0 +1,31 @@
+.ownImage{
+    margin: 1rem auto 0.5rem auto;
+    max-width: 80rem;
+    border-top: 1px solid black;
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.file_text {
+    font-size: 1.8rem;
+    text-align: left;
+    width: 67%;
+    padding: 0.5rem;
+}
+
+.file_input {
+    text-transform: uppercase;
+    font-size: 2rem;
+    padding: 0.5rem;
+    text-align: center;
+    cursor: pointer;
+    border-bottom: 1px solid gray;
+    margin-right: 3rem;
+}
+
+.file_input:hover{
+    opacity: 0.5;
+}
+

@@ -76,21 +76,20 @@ class Register extends React.Component {
                                     <ErrorMessage className={styles.error} name="password2">
                                         {msg=><div className={styles.error}>{msg}</div>}
                                     </ErrorMessage>
-                                    <Button disabled={!isValid} clicked={()=>this.onSubmitRegister(values)}> Sign me up </Button>
+                                    <Button marginProps='marginTopSmall' disabled={!isValid} clicked={()=>this.onSubmitRegister(values)}> Sign me up </Button>
                                 </div>
                                 <div className={styles.Right}>
                                     <span className={styles.loginwith}>Sign in with <br/> social network</span>
                                     <button className={[styles.social_signin,styles.facebook].join(' ')}>Log in with facebook</button>
                                     <button className={[styles.social_signin,styles.twitter].join(' ')}>Log in with Twitter</button>
-                                    <button className={[styles.social_signin,styles.google].join(' ')}>Log in with Google+
+                                    <button className={[styles.social_signin,styles.google].join(' ')}>Log in with Google+</button>
                                     <GoogleLogin
                                         clientId="698459763986-7t15fdr8aa6rvkj44mq6ttjmjiqm3p4a.apps.googleusercontent.com" //Creacted through https://console.developers.google.com/apis/credentials?project=prime-hydra-217402
                                         buttonText="LOGIN WITH GOOGLE"
                                         onSuccess={responseGoogle}
                                         onFailure={responseGoogle}
                                     />
-
-                                    </button>
+                                    
                                 </div>
                                 <div className={styles.OR}>OR</div>
                             </div>

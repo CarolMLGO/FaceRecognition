@@ -6,7 +6,7 @@ import styles from './App.module.css';
 import Particles from './Components/Particles/Particles';
 import Toolbar from './Components/Toolbar/Toolbar';
 //react router
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 
 const initialState = {
     user: {
@@ -52,7 +52,7 @@ class App extends Component {
                 <Route path='/' exact render={()=>(<ImageRecognition user={this.state.user}/>)}/>
                 <Route path='/signin' render={()=>(<Signin loadUser={this.loadUser}/>)} />
                 <Route path='/register' render={()=>(<Register loadUser={this.loadUser}/>)} />
-                <Route render={()=><h1> URL Not Found </h1>} />
+                <Redirect to = '/' />
             </Switch>
       </div>);
     }
